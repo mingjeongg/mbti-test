@@ -23,7 +23,7 @@ const Login = () => {
       if (data.success) {
         alert("login successed");
         login(data.accessToken); //accessToken을 local storage에 저장한다는 로직
-        navigate("/Profile");
+        navigate("/profile");
       } else {
         alert("login failed");
       }
@@ -31,7 +31,7 @@ const Login = () => {
       console.log("login error=>", error);
       alert("login failed");
     }
-
+    console.log("loginpage");
     return (
       <div>
         <h2>login page</h2>

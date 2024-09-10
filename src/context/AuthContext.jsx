@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 // token이 처음에는 null -> 그래서 token을 넣어 주는 거임
 const token = localStorage.getItem("accessToken");
 
-export const AuthProvider = ({ childern }) => {
+export const AuthProvider = ({ children }) => {
   //!! -> falthy(null)한 값을 false로 봐줌
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
 
@@ -16,13 +16,13 @@ export const AuthProvider = ({ childern }) => {
   };
 
   const logout = () => {
-    localStorage.setItem("accessToken");
+    localStorage.removeItem("accessToken");
     setIsAuthenticated(false);
   };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-      {childern}
+      {children}
     </AuthContext.Provider>
   );
 };
