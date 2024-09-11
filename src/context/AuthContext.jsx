@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -7,6 +7,8 @@ export const AuthContext = createContext();
 const token = localStorage.getItem("accessToken");
 
 export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
   //!! -> falthy(null)한 값을 false로 봐줌
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
 
@@ -20,8 +22,15 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  // //Json.string화 해줘야함, local stroage는 객체 못넣고 string만 넣을 수 있음
+  // const userInfo = (userNickname) => {
+  //   localStorage.setItem("userNickname", userNickname);
+  // };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, login, logout, user, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

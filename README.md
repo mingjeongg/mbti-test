@@ -1,8 +1,4 @@
-# React + Vite
+// axios를 사용하여 외부 데이터베이스와 통신하여 회원가입, 로그인, 로그아웃, 데이터 받아오기, 데이터 수정 기능 구현
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 외부에 위치한 서버와 통신하여 데이터를 가공하는 것이 처음이라 로직이 많이 헷갈리고 체계적으로 처리해야 할 로직들이 많아, 많이 헤메고 헷갈렸다
+  결과물이 예상 완성도 보다 많이 떨어져 절망스럽긴하나, 부족한만큼 손에 익을 때 까지 연습하고 또 연습해야겠다는 생각을 했다

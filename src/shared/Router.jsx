@@ -9,32 +9,73 @@ import TestResultPage from "../pages/TestResultPage";
 import { AuthContext } from "../context/AuthContext";
 import Layout from "../components/Layout";
 
-const PublicRoute = ({ element: Element, ...rest }) => {
+// children을 그리겠다.
+const PublicRoute = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
-  return !isAuthenticated ? <Element {...rest} /> : <Navigate to="/profile" />;
+
+  return !isAuthenticated ? children : <Navigate to="/profile" />;
 };
 
-const PrivateRoute = ({ element: Element, ...rest }) => {
-  const { isAuthenticated } = useContext(AuthContext);
-  return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
+const PrivateRoute = ({ children }) => {
+  const { isAuthenticated, user } = useContext(AuthContext);
+
+  return isAuthenticated ? children : <Navigate to="/login" />;
 };
+// const PrivateRoute = ({ element: Element, ...rest }) => {
+//   const { isAuthenticated } = useContext(AuthContext);
+//   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
+// };
 
 const SharedRouter = () => {
   return (
     <BrowserRouter>
-      {/* <Layout> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<PublicRoute element={Signup} />} />
-        <Route path="/profile" element={<PrivateRoute element={Profile} />} />
-        <Route path="/testpage" element={<PrivateRoute element={TestPage} />} />
-        <Route
-          path="/testresultpage"
-          element={<PrivateRoute element={TestResultPage} />}
-        />
-      </Routes>
-      {/* </Layout> */}
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <Signup />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/testpage"
+            element={
+              <PrivateRoute>
+                <TestPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/testresultpage"
+            element={
+              <PrivateRoute>
+                <TestResultPage />
+              </PrivateRoute>
+            }
+          />
+        </Routes>{" "}
+      </Layout>
     </BrowserRouter>
   );
 };

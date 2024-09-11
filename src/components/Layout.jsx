@@ -1,20 +1,10 @@
 import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 // Props 로 꼭 children 만 받을 필요는 없답니다.
 const Layout = ({ children }) => {
-  const navigate = useNavigate();
-  const { isAuthenticated, logout } = useContext(AuthContext);
-
-  // 이곳에서 로그인 하지 않은 사용자를 login 페이지로 보내줄 거에요.
-  useEffect(() => {
-    if (!isAuthenticated) {
-      return navigate("/login");
-    }
-  }, []);
-
-  const handleLogout = logout();
+  const { isAuthenticated, logout, user } = useContext(AuthContext);
 
   return (
     <div>
@@ -24,13 +14,17 @@ const Layout = ({ children }) => {
           <div className="space-x-4">
             {isAuthenticated ? (
               <>
-                <button>프로필</button>
-                <button>테스트</button>
-                <button>결과보기</button>
-                <button onClick={handleLogout}>로그아웃</button>
+                <Link to="/testpage">테스트</Link>
+                <Link to="/testresultpage">테스트 결과보기</Link>
+                <Link to="/profile">프로필</Link>
+                <button onClick={logout}>로그아웃</button>
+                <div>{user?.nickname}님 안녕하세요</div>
               </>
             ) : (
-              <Link to="/login">로그인</Link>
+              <>
+                <Link to="/signup">회원가입</Link>
+                <Link to="/login">로그인</Link>
+              </>
             )}
           </div>
         </nav>
