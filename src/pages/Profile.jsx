@@ -38,6 +38,7 @@ const Profile = () => {
   const handleNicknameChange = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("accessToken");
       const response = await axios.patch(
         "https://moneyfulpublicpolicy.co.kr/profile",
         { nickname: newNickname },
@@ -48,7 +49,7 @@ const Profile = () => {
         }
       );
 
-      if (response.data.succcess) {
+      if (response.data.success) {
         setUserInfo((prevState) => ({
           ...prevState,
           nickname: response.data.nickname,
@@ -70,7 +71,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Profile: {userInfo.nickname}</h2>
+      <h2>Profile: {userInfo?.nickname}</h2>
 
       <form onSubmit={handleNicknameChange}>
         <input

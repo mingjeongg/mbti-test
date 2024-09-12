@@ -1,3 +1,4 @@
+import { createTestResult } from "../api/testResults";
 import { questions } from "../data/questions";
 
 export const calculateMBTI = (answers) => {
